@@ -1,1 +1,9 @@
 F:\MyRepo\FTCP\FTCP\bin\Debug\FTCP.exe.config
+F:\MyRepo\FTCP\FTCP\bin\Debug\FTCP.exe
+F:\MyRepo\FTCP\FTCP\bin\Debug\FTCP.pdb
+F:\MyRepo\FTCP\FTCP\obj\Debug\FTCP.csprojResolveAssemblyReference.cache
+F:\MyRepo\FTCP\FTCP\obj\Debug\FTCP.Form1.resources
+F:\MyRepo\FTCP\FTCP\obj\Debug\FTCP.Properties.Resources.resources
+F:\MyRepo\FTCP\FTCP\obj\Debug\FTCP.csproj.GenerateResource.Cache
+F:\MyRepo\FTCP\FTCP\obj\Debug\FTCP.exe
+F:\MyRepo\FTCP\FTCP\obj\Debug\FTCP.pdb

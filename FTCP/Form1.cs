@@ -13,7 +13,8 @@ namespace FTCP
 {
     public partial class Form1 : Form
     {
-        //string RxString;
+
+        string RxString;
         byte[] data = new byte[1];
 
         public Form1()
@@ -36,7 +37,7 @@ namespace FTCP
             cmbBaud.SelectedIndex = 7;
         }
 
-        private void buttonStart_Click(object sender, EventArgs e)
+        private void buttonStart_Click_1(object sender, EventArgs e)
         {
             SerialPort serialport1 = new SerialPort();
             serialPort1.PortName = cmbPort.SelectedItem.ToString();
@@ -51,7 +52,7 @@ namespace FTCP
             }
         }
 
-        private void buttonStop_Click(object sender, EventArgs e)
+        private void buttonStop_Click_1(object sender, EventArgs e)
         {
             if (serialPort1.IsOpen)
             {
@@ -60,15 +61,14 @@ namespace FTCP
                 buttonStop.Enabled = false;
                 richTextBox1.ReadOnly = true;
             }
-
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (serialPort1.IsOpen) serialPort1.Close();
         }
-        //////////// Sentence control ///////////////////////////////////
-        /////////// "rgb <#leds> <#red> <#green> <#blue> <#mode>
+
+    
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             //starts text string with "-1" to set all leds
@@ -121,15 +121,40 @@ namespace FTCP
         {
             // sentence compile here befor sending to serial
         }
-        private void radioButton10_CheckedChanged(object sender, EventArgs e)
+        private void radioButtonON_CheckedChanged(object sender, EventArgs e)
         {
-            richTextBox1.Text = "1";
+            richTextBox1.Text = "rgb -1 250 250 250 1";
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void radioButtonOFF_CheckedChanged(object sender, EventArgs e)
+        {
+            richTextBox1.Text = "blank";
+        }
+
+        private void SendButton(object sender, EventArgs e)
         {
             serialPort1.Write(richTextBox1.Text); // sends sentence to serial
         }
+
+        private void DisplayText(object sender, EventArgs e)
+        {
+            //textBox1.AppendText(RxString);
+            richTextBox1.Text = RxString;
+        }
+
+        private void serialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
+        {
+            RxString = serialPort1.ReadExisting();
+            this.Invoke(new EventHandler(DisplayText));
+        }
+
+        private void cmbPort_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+
+
 
 
 

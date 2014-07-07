@@ -31,10 +31,12 @@
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cmbBaud = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.cmbPort = new System.Windows.Forms.ComboBox();
             this.buttonStop = new System.Windows.Forms.Button();
             this.buttonStart = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.sendButton = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -53,7 +55,6 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.buttonSetRed = new System.Windows.Forms.Button();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
-            this.label2 = new System.Windows.Forms.Label();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
@@ -65,9 +66,8 @@
             this.radioButton9 = new System.Windows.Forms.RadioButton();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.radioButton10 = new System.Windows.Forms.RadioButton();
-            this.radioButton11 = new System.Windows.Forms.RadioButton();
-            this.button1 = new System.Windows.Forms.Button();
+            this.radioButtonOFF = new System.Windows.Forms.RadioButton();
+            this.radioButtonON = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -104,6 +104,15 @@
             this.cmbBaud.Size = new System.Drawing.Size(71, 21);
             this.cmbBaud.TabIndex = 4;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(366, 22);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(66, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "by A.D 2014";
+            // 
             // cmbPort
             // 
             this.cmbPort.FormattingEnabled = true;
@@ -111,6 +120,7 @@
             this.cmbPort.Name = "cmbPort";
             this.cmbPort.Size = new System.Drawing.Size(61, 21);
             this.cmbPort.TabIndex = 3;
+            this.cmbPort.SelectedIndexChanged += new System.EventHandler(this.cmbPort_SelectedIndexChanged);
             // 
             // buttonStop
             // 
@@ -121,6 +131,7 @@
             this.buttonStop.TabIndex = 1;
             this.buttonStop.Text = "Disconect";
             this.buttonStop.UseVisualStyleBackColor = true;
+            this.buttonStop.Click += new System.EventHandler(this.buttonStop_Click_1);
             // 
             // buttonStart
             // 
@@ -130,24 +141,34 @@
             this.buttonStart.TabIndex = 0;
             this.buttonStart.Text = "Connect";
             this.buttonStart.UseVisualStyleBackColor = true;
+            this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click_1);
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.button1);
+            this.groupBox4.Controls.Add(this.sendButton);
             this.groupBox4.Controls.Add(this.richTextBox1);
             this.groupBox4.Location = new System.Drawing.Point(12, 353);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(468, 53);
+            this.groupBox4.Size = new System.Drawing.Size(468, 52);
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Raw Sentence";
             // 
+            // sendButton
+            // 
+            this.sendButton.Location = new System.Drawing.Point(386, 16);
+            this.sendButton.Name = "sendButton";
+            this.sendButton.Size = new System.Drawing.Size(75, 23);
+            this.sendButton.TabIndex = 1;
+            this.sendButton.Text = "Send";
+            this.sendButton.UseVisualStyleBackColor = true;
+            this.sendButton.Click += new System.EventHandler(this.SendButton);
+            // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(9, 18);
-            this.richTextBox1.Multiline = false;
+            this.richTextBox1.Location = new System.Drawing.Point(9, 16);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(360, 26);
+            this.richTextBox1.Size = new System.Drawing.Size(360, 23);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
@@ -324,15 +345,6 @@
             this.buttonSetRed.UseVisualStyleBackColor = true;
             this.buttonSetRed.Click += new System.EventHandler(this.buttonSetRed_Click);
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(366, 22);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(66, 13);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "by A.D 2014";
-            // 
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
@@ -453,8 +465,8 @@
             // 
             // groupBox8
             // 
-            this.groupBox8.Controls.Add(this.radioButton11);
-            this.groupBox8.Controls.Add(this.radioButton10);
+            this.groupBox8.Controls.Add(this.radioButtonOFF);
+            this.groupBox8.Controls.Add(this.radioButtonON);
             this.groupBox8.Location = new System.Drawing.Point(399, 75);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(81, 272);
@@ -462,45 +474,36 @@
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Mode";
             // 
-            // radioButton10
+            // radioButtonOFF
             // 
-            this.radioButton10.AutoSize = true;
-            this.radioButton10.Location = new System.Drawing.Point(9, 24);
-            this.radioButton10.Name = "radioButton10";
-            this.radioButton10.Size = new System.Drawing.Size(65, 17);
-            this.radioButton10.TabIndex = 0;
-            this.radioButton10.TabStop = true;
-            this.radioButton10.Text = "Solid On";
-            this.radioButton10.UseVisualStyleBackColor = true;
-            this.radioButton10.CheckedChanged += new System.EventHandler(this.radioButton10_CheckedChanged);
+            this.radioButtonOFF.AutoSize = true;
+            this.radioButtonOFF.Location = new System.Drawing.Point(9, 47);
+            this.radioButtonOFF.Name = "radioButtonOFF";
+            this.radioButtonOFF.Size = new System.Drawing.Size(65, 17);
+            this.radioButtonOFF.TabIndex = 1;
+            this.radioButtonOFF.TabStop = true;
+            this.radioButtonOFF.Text = "Solid Off";
+            this.radioButtonOFF.UseVisualStyleBackColor = true;
+            this.radioButtonOFF.CheckedChanged += new System.EventHandler(this.radioButtonOFF_CheckedChanged);
             // 
-            // radioButton11
+            // radioButtonON
             // 
-            this.radioButton11.AutoSize = true;
-            this.radioButton11.Location = new System.Drawing.Point(9, 47);
-            this.radioButton11.Name = "radioButton11";
-            this.radioButton11.Size = new System.Drawing.Size(65, 17);
-            this.radioButton11.TabIndex = 1;
-            this.radioButton11.TabStop = true;
-            this.radioButton11.Text = "Solid Off";
-            this.radioButton11.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(386, 16);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Send";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.radioButtonON.AutoSize = true;
+            this.radioButtonON.Location = new System.Drawing.Point(9, 24);
+            this.radioButtonON.Name = "radioButtonON";
+            this.radioButtonON.Size = new System.Drawing.Size(65, 17);
+            this.radioButtonON.TabIndex = 0;
+            this.radioButtonON.TabStop = true;
+            this.radioButtonON.Text = "Solid On";
+            this.radioButtonON.UseVisualStyleBackColor = true;
+            this.radioButtonON.CheckedChanged += new System.EventHandler(this.radioButtonON_CheckedChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(495, 422);
+            this.ClientSize = new System.Drawing.Size(489, 415);
             this.Controls.Add(this.groupBox8);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox2);
@@ -566,10 +569,10 @@
         private System.Windows.Forms.RadioButton radioButton9;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button sendButton;
         private System.Windows.Forms.GroupBox groupBox8;
-        private System.Windows.Forms.RadioButton radioButton11;
-        private System.Windows.Forms.RadioButton radioButton10;
+        private System.Windows.Forms.RadioButton radioButtonOFF;
+        private System.Windows.Forms.RadioButton radioButtonON;
     }
 }
 

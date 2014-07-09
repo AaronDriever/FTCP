@@ -16,7 +16,7 @@ namespace FTCP
         public sbyte ID;
         public override string ToString()
         {
-            return COMMAND_PREFIX + " " + ID.ToString() + " " + Red.ToString() + " " + Green.ToString() + " " + Blue.ToString() + " " + Mode.ToString();
+            return COMMAND_PREFIX + " " + ID.ToString() + " " + Red.ToString() + " " + Green.ToString() + " " + Blue.ToString() + " " + Mode.ToString()+"\n";
         }
     }
 }

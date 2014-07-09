@@ -11,20 +11,7 @@ using System.IO.Ports;
 
 namespace FTCP
 {
-    public class ColorCommand
-    {
-        const string COMMAND_PREFIX = "rgb";
-        public byte Red;
-        public byte Green;
-        public byte Blue;
-        public byte Mode;
-        public sbyte ID;
-        public override string ToString()
-        {
-            return COMMAND_PREFIX + " " + ID.ToString() + " " + Red.ToString() + " " + Green.ToString() + " " + Blue.ToString() + " " + Mode.ToString();
-        }
 
-    }
     public partial class Form1 : Form
     {
         ColorCommand Cmd;
@@ -84,55 +71,102 @@ namespace FTCP
         }
 
     
-        private void radioButton1_CheckedChanged(object sender,EventArgs e)
+        private void radioButtonAll_CheckedChanged(object sender,EventArgs e)
         {
             //starts text string with "-1" to set all leds
-            sbyte SelectedID=0;
+            sbyte SelectedID=-1;
+            //Find out which ID has been selected.
+            Cmd.ID = SelectedID;
+            richTextBox1.Text = Cmd.ToString();
+        }
+        private void radioButtonLED1_CheckedChanged(object sender, EventArgs e)
+        {
+            //starts text string with "1" to set all leds
+            sbyte SelectedID = 1;
             //Find out which ID has been selected.
             Cmd.ID = SelectedID;
             richTextBox1.Text = Cmd.ToString();
         }
 
+        private void radioButtonLED2_CheckedChanged(object sender, EventArgs e)
+        {
+            //starts text string with "2" to set all leds
+            sbyte SelectedID = 2;
+            //Find out which ID has been selected.
+            Cmd.ID = SelectedID;
+            richTextBox1.Text = Cmd.ToString();
+        }
+
+        private void radioButtonLED3_CheckedChanged(object sender, EventArgs e)
+        {
+            //starts text string with "3" to set all leds
+            sbyte SelectedID = 3;
+            //Find out which ID has been selected.
+            Cmd.ID = SelectedID;
+            richTextBox1.Text = Cmd.ToString();
+        }
+
+        private void radioButtonLED4_CheckedChanged(object sender, EventArgs e)
+        {
+            //starts text string with "4" to set all leds
+            sbyte SelectedID = 4;
+            //Find out which ID has been selected.
+            Cmd.ID = SelectedID;
+            richTextBox1.Text = Cmd.ToString();
+        }
+
+        private void radioButtonLED5_CheckedChanged(object sender, EventArgs e)
+        {
+            //starts text string with "5" to set all leds
+            sbyte SelectedID = 5;
+            //Find out which ID has been selected.
+            Cmd.ID = SelectedID;
+            richTextBox1.Text = Cmd.ToString();
+        }
+
+        private void radioButtonLED6_CheckedChanged(object sender, EventArgs e)
+        {
+            //starts text string with "6" to set all leds
+            sbyte SelectedID = 6;
+            //Find out which ID has been selected.
+            Cmd.ID = SelectedID;
+            richTextBox1.Text = Cmd.ToString();
+        }
+
+        private void radioButtonLED7_CheckedChanged(object sender, EventArgs e)
+        {
+            //starts text string with "7" to set all leds
+            sbyte SelectedID = 7;
+            //Find out which ID has been selected.
+            Cmd.ID = SelectedID;
+            richTextBox1.Text = Cmd.ToString();
+        }
+
+        private void radioButtonLED8_CheckedChanged(object sender, EventArgs e)
+        {
+            //starts text string with "8" to set all leds
+            sbyte SelectedID = 8;
+            //Find out which ID has been selected.
+            Cmd.ID = SelectedID;
+            richTextBox1.Text = Cmd.ToString();
+        }
         private void trackBarRed_Scroll(object sender, EventArgs e)
         {
   
-            Cmd.Red= Convert.ToByte(trackBarRed.Value);
-
-            //serialPort1.Write(data, 0, 1);
-            textBox2.Text = Cmd.ToString();
-        }
-
-        private void buttonSetRed_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text = textBox2.Text;
+            Cmd.Red= Convert.ToByte(trackBarRed.Value);           
+            richTextBox1.Text = Cmd.ToString();
         }
 
         private void trackBarGreen_Scroll(object sender, EventArgs e)
         {
-            byte pwm;
-            pwm = Convert.ToByte(trackBarGreen.Value);
-            data[0] = pwm;
-            // serialPort1.Write(data, 0, 1);
-            textBox2.Text = Convert.ToString(pwm);
-        }
-
-        private void buttonSetGreen_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text = textBox2.Text;
+            Cmd.Green = Convert.ToByte(trackBarGreen.Value);
+            richTextBox1.Text = Cmd.ToString();
         }
 
         private void trackBarBlue_Scroll(object sender, EventArgs e)
         {
-            byte pwm;
-            pwm = Convert.ToByte(trackBarBlue.Value);
-            data[0] = pwm;
-            //serialPort1.Write(data, 0, 1);
-            textBox2.Text = Convert.ToString(pwm);
-        }
-
-        private void buttonSetBlue_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text = textBox2.Text;
+            Cmd.Blue = Convert.ToByte(trackBarBlue.Value);
+            richTextBox1.Text = Cmd.ToString();
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
@@ -141,7 +175,11 @@ namespace FTCP
         }
         private void radioButtonON_CheckedChanged(object sender, EventArgs e)
         {
-            richTextBox1.Text = "rgb -1 250 250 250 1";
+            //starts text string with "-1" to set all leds
+            byte SelectedMode = 1;
+            //Find out which ID has been selected.
+            Cmd.Mode = SelectedMode;
+            richTextBox1.Text = Cmd.ToString();            
         }
 
         private void radioButtonOFF_CheckedChanged(object sender, EventArgs e)
@@ -170,11 +208,6 @@ namespace FTCP
         {
 
         }
-
-
-
-
-
 
     }
 

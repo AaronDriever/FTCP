@@ -15,4 +15,4 @@ D:\Vault\FTCP\FTCP\bin\Debug\FTCP.pdb
 D:\Vault\FTCP\FTCP\obj\Debug\FTCP.csprojResolveAssemblyReference.cache
 D:\Vault\FTCP\FTCP\obj\Debug\FTCP.Properties.Resources.resources
 D:\Vault\FTCP\FTCP\obj\Debug\FTCP.csproj.GenerateResource.Cache
-D:\Vault\FTCP\FTCP\obj\Debug\FTCP.ColorCommand.resources
+D:\Vault\FTCP\FTCP\obj\Debug\FTCP.Form1.resources

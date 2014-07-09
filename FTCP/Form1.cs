@@ -11,14 +11,29 @@ using System.IO.Ports;
 
 namespace FTCP
 {
+    public class ColorCommand
+    {
+        const string COMMAND_PREFIX = "rgb";
+        public byte Red;
+        public byte Green;
+        public byte Blue;
+        public byte Mode;
+        public sbyte ID;
+        public override string ToString()
+        {
+            return COMMAND_PREFIX + " " + ID.ToString() + " " + Red.ToString() + " " + Green.ToString() + " " + Blue.ToString() + " " + Mode.ToString();
+        }
+
+    }
     public partial class Form1 : Form
     {
-
+        ColorCommand Cmd;
         string RxString;
         byte[] data = new byte[1];
 
         public Form1()
         {
+            Cmd = new ColorCommand();
             InitializeComponent();
             foreach (string serialName in SerialPort.GetPortNames())
             {
@@ -69,19 +84,22 @@ namespace FTCP
         }
 
     
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        private void radioButton1_CheckedChanged(object sender,EventArgs e)
         {
             //starts text string with "-1" to set all leds
-            richTextBox1.Text = "rgb -1";
+            sbyte SelectedID=0;
+            //Find out which ID has been selected.
+            Cmd.ID = SelectedID;
+            richTextBox1.Text = Cmd.ToString();
         }
 
         private void trackBarRed_Scroll(object sender, EventArgs e)
         {
-            byte pwm;
-            pwm = Convert.ToByte(trackBarRed.Value);
-            data[0] = pwm;
+  
+            Cmd.Red= Convert.ToByte(trackBarRed.Value);
+
             //serialPort1.Write(data, 0, 1);
-            textBox2.Text = Convert.ToString(pwm);
+            textBox2.Text = Cmd.ToString();
         }
 
         private void buttonSetRed_Click(object sender, EventArgs e)

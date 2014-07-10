@@ -44,6 +44,8 @@ namespace FTCP
             SerialPort serialport1 = new SerialPort();
             serialPort1.PortName = cmbPort.SelectedItem.ToString();
             serialPort1.BaudRate = Convert.ToInt32(cmbBaud.SelectedItem);
+            serialport1.DtrEnable = true;
+            serialport1.RtsEnable = true;
 
             serialPort1.Open();
             if (serialPort1.IsOpen)

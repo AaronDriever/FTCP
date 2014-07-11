@@ -43,7 +43,18 @@ namespace FTCP
         {
             SerialPort serialport1 = new SerialPort();
             serialPort1.PortName = cmbPort.SelectedItem.ToString();
-            serialPort1.BaudRate = Convert.ToInt32(cmbBaud.SelectedItem);
+    
+            int baudrate; //make a variable to hold the baudrate. Initialized to zero.
+            //Int32.TryParse tries to convert the string to an integer and store the value in baudrate. 
+            //if it cant, it returns false, if it can it returns true. 
+            //if the conversion fails, baudrate is unchanged, and the program doesn't crash like it would with Int32.Parse or Convert.ToInt32. 
+            if (Int32.TryParse((string)cmbBaud.SelectedItem, out baudrate)) { 
+                serialport1.BaudRate = baudrate;
+            }
+            else {
+                serialPort1.BaudRate = 0; //Default baudrate
+            }
+            
             serialport1.DtrEnable = true;
             serialport1.RtsEnable = true;
 
@@ -75,6 +86,7 @@ namespace FTCP
     
         private void radioButtonAll_CheckedChanged(object sender,EventArgs e)
         {
+            //You don't need to use a selectedID here. You could set Cmd.ID directly with the value you want it to have. This goe's for all of the radiobutton Changed methods.
             //starts text string with "-1" to set all leds
             sbyte SelectedID=-1;
             //Find out which ID has been selected.
@@ -101,6 +113,7 @@ namespace FTCP
 
         private void radioButtonLED3_CheckedChanged(object sender, EventArgs e)
         {
+            
             //starts text string with "3" to set all leds
             sbyte SelectedID = 3;
             //Find out which ID has been selected.
@@ -154,8 +167,12 @@ namespace FTCP
         }
         private void trackBarRed_Scroll(object sender, EventArgs e)
         {
-  
-            Cmd.Red= Convert.ToByte(trackBarRed.Value);           
+            /*Old Code
+            Cmd.Red= Convert.ToByte(trackBarRed.Value);
+            */
+            //We can use simpler conversions between integer types. since trackBarRed.Value is an integer, and because we know that the value of trackBarRed.Value will never be less than 0,
+            //we can "cast" (vocabulary word similar to convert) the value instead of using the more cumbersom Conver.ToByte method. This is true of all the trackBarXXX_Scroll methods.
+            Cmd.Red = (byte)trackBarRed.Value;
             richTextBox1.Text = Cmd.ToString();
         }
 
@@ -173,10 +190,13 @@ namespace FTCP
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
+            //Shouldn't need this now that ColorCommand is handling your sentence construction.
             // sentence compile here befor sending to serial
         }
         private void radioButtonON_CheckedChanged(object sender, EventArgs e)
         {
+            //The same thing can be done with these radiosbuttons as can be done with the LED ID radiobuttons.
+            //You don't need a SelectMode variable because Cmd.Mode is already a variable.
             //starts text string with "-1" to set all leds
             byte SelectedMode = 1;
             //Find out which ID has been selected.

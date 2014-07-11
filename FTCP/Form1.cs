@@ -41,7 +41,7 @@ namespace FTCP
 
         private void buttonStart_Click_1(object sender, EventArgs e)
         {
-            SerialPort serialport1 = new SerialPort();
+            
             serialPort1.PortName = cmbPort.SelectedItem.ToString();
     
             int baudrate; //make a variable to hold the baudrate. Initialized to zero.
@@ -49,14 +49,14 @@ namespace FTCP
             //if it cant, it returns false, if it can it returns true. 
             //if the conversion fails, baudrate is unchanged, and the program doesn't crash like it would with Int32.Parse or Convert.ToInt32. 
             if (Int32.TryParse((string)cmbBaud.SelectedItem, out baudrate)) { 
-                serialport1.BaudRate = baudrate;
+                serialPort1.BaudRate = baudrate;
             }
             else {
                 serialPort1.BaudRate = 0; //Default baudrate
             }
             
-            serialport1.DtrEnable = true;
-            serialport1.RtsEnable = true;
+            serialPort1.DtrEnable = true;
+            serialPort1.RtsEnable = true;
 
             serialPort1.Open();
             if (serialPort1.IsOpen)
@@ -222,13 +222,18 @@ namespace FTCP
 
         private void serialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
+            //There's an issue with this that you might not have thought about, and that's that ReadExisting reads ONLY what's in the buffer, and nothing else.
+            //So if there's only 1 byte in the buffer, only that 1 byte is going to get set in RxString.
             RxString = serialPort1.ReadExisting();
+            //Furthermore, this isn't exactly how you would normally want to write this kind of thing.
+            //I'd suggest rewriting DisplayText to take a string, and then use this.Invoke(new Action<string>(DisplayText),RxString). 
+            //That way you can actually get rid of the class variable RxString. 
             this.Invoke(new EventHandler(DisplayText));
         }
 
         private void cmbPort_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            //I'm not sure, but I think you need this filled out.
         }
 
     }

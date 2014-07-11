@@ -43,11 +43,11 @@ namespace FTCP
 
         private void buttonStart_Click_1(object sender, EventArgs e)
         {
-            SerialPort serialport1 = new SerialPort();
+            SerialPort serialPort1 = new SerialPort();
             serialPort1.PortName = cmbPort.SelectedItem.ToString();
             serialPort1.BaudRate = Convert.ToInt32(cmbBaud.SelectedItem);
-            serialport1.DtrEnable = true;
-            serialport1.RtsEnable = true;
+            serialPort1.DtrEnable = true;
+            serialPort1.RtsEnable = true;
 
             serialPort1.Open();
             if (serialPort1.IsOpen)

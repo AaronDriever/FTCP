@@ -37,6 +37,8 @@ namespace FTCP
             cmbBaud.Items.Add("115200");
             cmbBaud.Items.Add("230400");
             cmbBaud.SelectedIndex = 7;
+
+
         }
 
         private void buttonStart_Click_1(object sender, EventArgs e)
@@ -189,13 +191,19 @@ namespace FTCP
 
         private void SendButton(object sender, EventArgs e)
         {
-            serialPort1.Write(richTextBox1.Text); // sends sentence to serial
+             
+            //serialPort1.Write(richTextBox1.Text); // sends sentence to serial
+            if (serialPort1.IsOpen)
+            {
+                serialPort1.WriteLine(richTextBox1.Text);
+
+            }
         }
 
         private void DisplayText(object sender, EventArgs e)
         {
             //textBox1.AppendText(RxString);
-            richTextBox1.Text = RxString;
+            //richTextBox1.Text = RxString;
         }
 
         private void serialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)

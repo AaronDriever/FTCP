@@ -194,7 +194,7 @@
             this.trackBarBlue.Location = new System.Drawing.Point(6, 19);
             this.trackBarBlue.Maximum = 255;
             this.trackBarBlue.Name = "trackBarBlue";
-            this.trackBarBlue.Size = new System.Drawing.Size(238, 42);
+            this.trackBarBlue.Size = new System.Drawing.Size(238, 45);
             this.trackBarBlue.TabIndex = 1;
             this.trackBarBlue.TickFrequency = 15;
             this.trackBarBlue.Scroll += new System.EventHandler(this.trackBarBlue_Scroll);
@@ -216,7 +216,7 @@
             this.trackBarGreen.Location = new System.Drawing.Point(6, 19);
             this.trackBarGreen.Maximum = 255;
             this.trackBarGreen.Name = "trackBarGreen";
-            this.trackBarGreen.Size = new System.Drawing.Size(238, 42);
+            this.trackBarGreen.Size = new System.Drawing.Size(238, 45);
             this.trackBarGreen.TabIndex = 1;
             this.trackBarGreen.TickFrequency = 15;
             this.trackBarGreen.Scroll += new System.EventHandler(this.trackBarGreen_Scroll);
@@ -238,10 +238,14 @@
             this.trackBarRed.Location = new System.Drawing.Point(6, 18);
             this.trackBarRed.Maximum = 255;
             this.trackBarRed.Name = "trackBarRed";
-            this.trackBarRed.Size = new System.Drawing.Size(238, 42);
+            this.trackBarRed.Size = new System.Drawing.Size(238, 45);
             this.trackBarRed.TabIndex = 1;
             this.trackBarRed.TickFrequency = 15;
             this.trackBarRed.Scroll += new System.EventHandler(this.trackBarRed_Scroll);
+            // 
+            // serialPort1
+            // 
+            this.serialPort1.BaudRate = 115200;
             // 
             // radioButtonAll
             // 

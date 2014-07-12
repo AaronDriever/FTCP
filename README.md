@@ -1,4 +1,0 @@
-FTCP
-====
-
-window forms program

@@ -118,9 +118,9 @@
             this.buttonStop.Enabled = false;
             this.buttonStop.Location = new System.Drawing.Point(277, 17);
             this.buttonStop.Name = "buttonStop";
-            this.buttonStop.Size = new System.Drawing.Size(64, 23);
+            this.buttonStop.Size = new System.Drawing.Size(83, 23);
             this.buttonStop.TabIndex = 1;
-            this.buttonStop.Text = "Disconect";
+            this.buttonStop.Text = "Disconnect";
             this.buttonStop.UseVisualStyleBackColor = true;
             this.buttonStop.Click += new System.EventHandler(this.buttonStop_Click_1);
             // 

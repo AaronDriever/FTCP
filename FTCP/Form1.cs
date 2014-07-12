@@ -58,7 +58,7 @@ namespace FTCP
             
             serialPort1.DtrEnable = true;
             serialPort1.RtsEnable = true;
-
+            
             serialPort1.Open();
             if (serialPort1.IsOpen)
             {
@@ -213,6 +213,7 @@ namespace FTCP
         private void SendButton(object sender, EventArgs e)
         {
             serialPort1.Write(richTextBox1.Text); // sends sentence to serial
+            serialPort1.Write("\r"); // right here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Boom!!!!!!!!!!!
         }
 
         private void DisplayText(object sender, EventArgs e)

@@ -1,4 +1,4 @@
-
+﻿
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -42,22 +42,20 @@ namespace FTCP
 
         private void buttonStart_Click_1(object sender, EventArgs e)
         {
-
+            
             serialPort1.PortName = cmbPort.SelectedItem.ToString();
-
+    
             int baudrate; //make a variable to hold the baudrate. Initialized to zero.
             //Int32.TryParse tries to convert the string to an integer and store the value in baudrate. 
             //if it cant, it returns false, if it can it returns true. 
             //if the conversion fails, baudrate is unchanged, and the program doesn't crash like it would with Int32.Parse or Convert.ToInt32. 
-            if (Int32.TryParse((string)cmbBaud.SelectedItem, out baudrate))
-            {
+            if (Int32.TryParse((string)cmbBaud.SelectedItem, out baudrate)) { 
                 serialPort1.BaudRate = baudrate;
             }
-            else
-            {
+            else {
                 serialPort1.BaudRate = 0; //Default baudrate
             }
-
+            
             serialPort1.DtrEnable = true;
             serialPort1.RtsEnable = true;
 
@@ -86,12 +84,12 @@ namespace FTCP
             if (serialPort1.IsOpen) serialPort1.Close();
         }
 
-
-        private void radioButtonAll_CheckedChanged(object sender, EventArgs e)
+    
+        private void radioButtonAll_CheckedChanged(object sender,EventArgs e)
         {
             //You don't need to use a selectedID here. You could set Cmd.ID directly with the value you want it to have. This goe's for all of the radiobutton Changed methods.
             //starts text string with "-1" to set all leds
-            sbyte SelectedID = -1;
+            sbyte SelectedID=-1;
             //Find out which ID has been selected.
             Cmd.ID = SelectedID;
             richTextBox1.Text = Cmd.ToString();
@@ -116,7 +114,7 @@ namespace FTCP
 
         private void radioButtonLED3_CheckedChanged(object sender, EventArgs e)
         {
-
+            
             //starts text string with "3" to set all leds
             sbyte SelectedID = 3;
             //Find out which ID has been selected.
@@ -204,7 +202,7 @@ namespace FTCP
             byte SelectedMode = 1;
             //Find out which ID has been selected.
             Cmd.Mode = SelectedMode;
-            richTextBox1.Text = Cmd.ToString();
+            richTextBox1.Text = Cmd.ToString();            
         }
 
         private void radioButtonOFF_CheckedChanged(object sender, EventArgs e)
@@ -240,4 +238,6 @@ namespace FTCP
         }
 
     }
+
+
 }

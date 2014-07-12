@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace FTCP
 {
     public class ColorCommand
-    {
+    {   
         const string COMMAND_PREFIX = "rgb";
         public byte Red;
         public byte Green;
